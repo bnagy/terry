@@ -23,7 +23,7 @@ import (
 const MAXLEN = 10 * 1024 * 1024 // 10 MB
 
 var (
-	flagFn      *string = flag.String("fn", ".cur_input", "filename to use")
+	flagFn      *string = flag.String("fn", ".cur_input", "Specific filename to use (can override -dest)")
 	flagDestDir *string = flag.String("dest", "", "directory to use to stage tests to disk")
 	flagSrcDir  *string = flag.String("src", "", "directory with test corpus")
 	flagServer  *string = flag.String("server", "", "remote radamsa server to use for tests")
@@ -80,8 +80,8 @@ func readNetString(r *bufio.Reader) ([]byte, error) {
 	return data, nil
 }
 
-func stageTest(raw []byte) {
-	err := ioutil.WriteFile(path.Join(*flagDestDir, *flagFn), raw, 0600)
+func stageTest(fn string, raw []byte) {
+	err := ioutil.WriteFile(fn, raw, 0600)
 	if err != nil {
 		log.Fatalf("[SAD] failed to create test file: %s", err)
 	}
@@ -208,7 +208,13 @@ func main() {
 			log.Fatalf("[SAD] failed to create -dest: %s", err)
 		}
 	}
-	err = ioutil.WriteFile(path.Join(*flagDestDir, *flagFn), []byte("test"), 0600)
+	test_fn := path.Join(*flagDestDir, *flagFn)
+	if path.Base(*flagFn) != *flagFn {
+		// user suppled filename, and it has a basedir. Use their name, not
+		// ours.
+		test_fn = *flagFn
+	}
+	err = ioutil.WriteFile(test_fn, []byte("test"), 0600)
 	if err != nil {
 		log.Fatalf("[SAD] failed to create test file: %s", err)
 	}
@@ -264,7 +270,7 @@ func main() {
 				log.Fatalf("[SAD] failed to fix test: %s", err)
 			}
 		}
-		stageTest(test)
+		stageTest(test_fn, test)
 
 		count++
 
