@@ -2,7 +2,7 @@
 
 ## About
 
-This is a very early commit. It works, but there's not much doc yet. Terry gets tests from radamsa and does instrumentation ( crash analysis and triage ) with (francis)[https://github.com/bnagy/francis].
+This is a very early commit. It works, but there's not much doc yet. Terry gets tests from radamsa and does instrumentation ( crash analysis and triage ) with [francis](https://github.com/bnagy/francis).
 
 ```
   Usage: terry -src /path/to/corpus -dest /path/to/workdir -- /path/to/target -infile @@ -foo -quux
