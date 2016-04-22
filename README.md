@@ -4,6 +4,8 @@
 
 This is a very early commit. It works, but there's not much doc yet. Terry gets tests from radamsa and does instrumentation ( crash analysis and triage ) with [francis](https://github.com/bnagy/francis).
 
+For more information about fixers for the `-fix` option, check [aflfix](https://github.com/bnagy/aflfix)
+
 ```
   Usage: terry -src /path/to/corpus -dest /path/to/workdir -- /path/to/target -infile @@ -foo -quux
   OR: terry -server 192.168.1.1:4141 -dest /path/to/workdir -- /path/to/target -infile @@ -foo -quux
@@ -15,7 +17,7 @@ This is a very early commit. It works, but there's not much doc yet. Terry gets 
   -server="": remote radamsa server to use for tests
   -src="": directory with test corpus
   -t=-1: timeout in secs for app under test
-  ```
+```
 
 ## Contributing
 

@@ -274,7 +274,7 @@ func main() {
 
 		count++
 
-		ci, err := francis.Run(testCmd)
+		ci, err := francis.Run(testCmd, "", 0, 0)
 		if err == nil {
 			// this is backasswards for this application. For the triage tool
 			// err meant there was no crash.
